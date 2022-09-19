@@ -12,7 +12,7 @@ const INITIAL_STATE = {
 
 export const AuthProvider = ({ children }) => {
 
-  const [address, setAddress] = useState('')
+  const [address, setAddress] = useState(undefined)
   const [isConnected, setIsConnected] = useState(false)
 
   const walletConnect = async() => {

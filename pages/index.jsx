@@ -1,8 +1,23 @@
 import React, { useState } from "react"
 import Image from "next/image"
 import Select from 'react-select'
+import CreatedPost from "../components/Post/CreatedPost"
+import Footer from '../components/Layout/Footer'
 
-export default function Home() {
+export default function Home({ contents }) {
+
+  // console.log(contents)
+
+  const options = [
+    {
+      value: 'latest',
+      label: '최신순'
+    },
+    {
+      value: 'popularity',
+      label: '인기순'
+    }
+  ]
 
   return (
     <main className='w-full h-auto mx-auto'>
@@ -26,9 +41,29 @@ export default function Home() {
       </section>
       <section className="w-[900px] mt-12 mx-auto">
         <div className="flex justify-start">
-          <Select className="w-[200px]" />
+          <Select
+            className="basic-single w-[200px] outline-none"
+            classNamePrefix="select"
+            isSearchable={false}
+            defaultValue={options[0]}
+            options={options} 
+          />
+        </div>
+        <div>
+          <CreatedPost />
         </div>
       </section>
+      <Footer />
     </main>
   )
 }
+
+// export async function getServerSideProps() {
+
+//   const apiUrl = "https://9333-58-76-161-105.jp.ngrok.io/article"
+//   const contents = await fetch(apiUrl)
+  
+//   return {
+//     props: { contents }
+//   }
+// }

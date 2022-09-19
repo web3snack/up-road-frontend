@@ -6,13 +6,11 @@ const WalletConnect = () => {
   const { address, isConnected, walletConnect } = useContext(AuthContext)
 
   return (
-    <div className='flex items-center px-4 border-2 border-[#fff] bg-[#000] rounded-2xl hover:bg-[#fff] hover:border-[#000] duration-200'>
-      <button onClick={walletConnect} className="font-semibold text-md text-[#fff] hover:text-[#000]">
-        {isConnected
-         ? <span>connected</span>
-         : <span>wallet connect</span>}
-      </button>
-    </div>
+    <button onClick={walletConnect} className={`w-40 h-8 border border-[#fff] bg-[#000] rounded-2xl hover:bg-[#fff] hover:border-[#000] hover:text-[#000] duration-200 ont-medium text-md text-[#fff] ${ isConnected ? "select-none" : null}`}>
+      {isConnected
+        ? <span className='select-none'>wallet connected</span>
+        : <span>wallet connect</span>}
+    </button>
   )
 }
 
