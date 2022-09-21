@@ -1,12 +1,12 @@
 import React, { useState } from "react"
 import Image from "next/image"
-import Select from 'react-select'
+import axios from 'axios'
 import CreatedPost from "../components/Post/CreatedPost"
 import Footer from '../components/Layout/Footer'
 
-export default function Home({ contents }) {
+export default function Home(props) {
 
-  // console.log(contents)
+  console.log(props)
 
   const options = [
     {
@@ -40,15 +40,6 @@ export default function Home({ contents }) {
         </div>
       </section>
       <section className="w-[900px] mt-12 mx-auto">
-        <div className="flex justify-start">
-          <Select
-            className="basic-single w-[200px] outline-none"
-            classNamePrefix="select"
-            isSearchable={false}
-            defaultValue={options[0]}
-            options={options} 
-          />
-        </div>
         <div>
           <CreatedPost />
         </div>
@@ -58,12 +49,12 @@ export default function Home({ contents }) {
   )
 }
 
-// export async function getServerSideProps() {
+export async function getServerSideProps() {
 
-//   const apiUrl = "https://9333-58-76-161-105.jp.ngrok.io/article"
-//   const contents = await fetch(apiUrl)
-  
-//   return {
-//     props: { contents }
-//   }
-// }
+  const response = await axios.get("https://4b880c9d-fec7-4b7a-824d-32c94510899f.mock.pstmn.io/article")
+  const articles = response.data // JSON.parse(JSON.stringify(response.data))
+
+  return {
+    props: { articles }
+  }
+}
