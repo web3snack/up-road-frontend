@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import Web3Modal from 'web3modal'
+import axios from "axios";
 import { ethers } from 'ethers'
 import { providerOptions } from '../context/walletConnect/providerOptions'
 
@@ -36,6 +37,17 @@ export const AuthProvider = ({ children }) => {
       console.log(error)
     }
   }
+ 
+  const signInWithAddress = async (walletAddress) => {
+    const apiUrl = `https://4b880c9d-fec7-4b7a-824d-32c94510899f.mock.pstmn.io/auth`
+    if(walletAddress !== "undefined") {
+      const response = await axios.post(apiUrl, {
+        account_address: walletAddress
+      })
+      console.log(response)
+    }
+  }
+
   return (
     <AuthContext.Provider value={{ address, isConnected, walletConnect}}>
       { children }

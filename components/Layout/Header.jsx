@@ -2,11 +2,15 @@ import React, { useState, useContext } from 'react'
 import Link from 'next/link'
 import Logo from '../Common/Logo'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import WalletConnect from '../Common/walletConnect'
 import ProfileModal from '../Common/profileModal'
 import { AuthContext } from '../../context/AuthContext'
 
 const Header = () => {
+
+  const router = useRouter()
+  const path = router.pathname
 
   const { isConnected } = useContext(AuthContext)
   const [ showModal, setShowModal ] = useState(false)
@@ -18,25 +22,33 @@ const Header = () => {
   }
 
   return (
-    <div className='w-full h-auto shadow'>
-      <div className='relative w-4/5 h-12 mx-auto flex justify-between items-center'>
+    <div className='w-full h-auto shadow fixed z-50'>
+      <div className='relative w-full bg-[#fff] px-20 h-12 mx-auto flex justify-between items-center'>
         <Logo />
         <nav className='flex itmes-center'>
-          <Link href="/create">
-            <a className='px-4 rounded-xl hover:shadow duration-200 font-semibold'>create</a>
-          </Link> 
-          <WalletConnect />
+
           {isConnected
             ? 
-                <div className='flex items-center mx-4 hover:cursor-pointer' onClick={changeModalState}>
-                  <Image 
-                    src="/assets/Profile-icon.svg"
-                    alt="profile"
-                    width={30}
-                    height={30}
-                  />
+                <div className='flex items-center mx-4 hover:cursor-pointer'>
+                  {
+                    path !== "/create"
+                      ? (
+                        <Link href="/create">
+                          <a className='px-6 py-[2px] pb-[3px] border border-[#fff] rounded-2xl bg-[#000] text-[#fff] hover:border-[#000] hover:bg-[#fff] hover:text-[#000] duration-200 mx-2'>create</a>
+                        </Link> 
+                      ): null
+                  }
+                  <div className="mt-2" onClick={changeModalState}>
+                    <Image 
+                      src="/assets/Profile-icon.svg"
+                      alt="profile"
+                      width={27}
+                      height={27}
+                    />
+                  </div>
                 </div>
-            : null 
+            : <WalletConnect />
+
           }
         </nav>
         {showModal
