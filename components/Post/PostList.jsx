@@ -7,9 +7,6 @@ const PostList = ({ setLinkHandler, setDescriptionHandler, removeContent, conten
   const dragItem = React.useRef(null)
   const dragOverItem = React.useRef(null)
 
-  useEffect(() => {
-    handleSort()
-  }, [])
 
   const handleSort = () => {
     let contentItems = [...contentList]
