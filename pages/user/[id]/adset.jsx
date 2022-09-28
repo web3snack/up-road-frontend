@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import SideBar from '../../../components/Layout/SideBar'
-import AdvertisementDashboard from '../../../components/Common/AdvertisementDashboard'
-import EditAdvertisementModal from '../../../components/Common/EditAdvertisementModal'
+import AdvertisementDashboard from '../../../components/Advertisement/AdvertisementDashboard'
+import EditAdvertisementModal from '../../../components/Advertisement/EditAdvertisementModal'
 
 const Adset = ({ advertises }) => {  
 
@@ -61,7 +61,7 @@ const Adset = ({ advertises }) => {
 export default Adset
 
 export async function getServerSideProps() {
-  const response = await axios.get("https://4b880c9d-fec7-4b7a-824d-32c94510899f.mock.pstmn.io/user/advertisements");
+  const response = await axios.get(`${process.env.API_URL}/user/advertisements`);
   const advertises = JSON.parse(JSON.stringify(response.data))
   
   return {
