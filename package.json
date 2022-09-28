@@ -13,6 +13,7 @@
     "dotenv": "^16.0.2",
     "ethers": "^5.7.1",
     "next": "latest",
+    "next-themes": "^0.2.1",
     "postcss": "^8.4.16",
     "react": "17.0.2",
     "react-dnd": "^16.0.1",

@@ -33,7 +33,7 @@ const Likepage = ({ articles }) => {
 export default Likepage
 
 export async function getServerSideProps() {
-  const response = await axios.get("https://4b880c9d-fec7-4b7a-824d-32c94510899f.mock.pstmn.io/user/articles/like");
+  const response = await axios.get(`${process.env.API_URL}/user/articles/like`);
   const articles = JSON.parse(JSON.stringify(response.data))
   
   return {

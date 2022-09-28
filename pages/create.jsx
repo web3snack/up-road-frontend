@@ -31,7 +31,8 @@ function Create() {
     const content = {
       id: contentList.length + 1,
       link: "DEFAULT_LINK",
-      description: "DEFAULT_DESCRIPTION"
+      description: "DEFAULT_DESCRIPTION",
+      
     }
 
     setContentList(contentList.concat(content))
@@ -67,20 +68,39 @@ function Create() {
     }
   }
 
+
   const createArticle = async() => {
+
+    console.log(contentList)
+    console.log(tagList)
+
 
     const article = {
       title: titleValue,
+      user_id:3,
       description: descriptionValue,
-      keywords: tagList,
       level: 1,
-      blocks: contentList,
-      public: true
+      is_public: 0,
+      has_ad: 0
     }
 
-    const response = await axios.post("https://4b880c9d-fec7-4b7a-824d-32c94510899f.mock.pstmn.io/article", article)
-    console.log(response)
-    // console.log(article)
+    const loginResult = await axios.post(`${process.env.API_URL}/auth/signup`) 
+
+    let accessToken = loginResult.data.accessToken
+    axios.post(`${process.env.API_URL}/article`, JSON.parse(JSON.stringify(article)), {
+      headers: {
+        "Content-Type": `application/json`,
+        Authorization: `Bearer ${accessToken}`
+      },
+      body: {
+        blocks: contentList,
+        keywords: tagList
+      }
+    }).then((response) => {
+      console.log(response)
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 
   return (

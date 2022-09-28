@@ -4,17 +4,21 @@ import axios from "axios";
 import { ethers } from 'ethers'
 import { providerOptions } from '../context/walletConnect/providerOptions'
 
+
 // initial state
 const INITIAL_STATE = {
   address: "DEFAULT_ADDRESS",
   isConnected: false,
-  walletConnect() {}
+  walletConnect() {},
 }
 
 export const AuthProvider = ({ children }) => {
 
   const [address, setAddress] = useState(undefined)
   const [isConnected, setIsConnected] = useState(false)
+  const [isSignUped, setIsSignUped] = useState(false)
+  const [token, setToken] = useState("")
+  const [showLoginModal, setShowLoginModal] = useState(false)
 
   const walletConnect = async() => {
     try {
@@ -33,23 +37,35 @@ export const AuthProvider = ({ children }) => {
       setAddress(walletAddress)
       setIsConnected(true)
 
+      const isSignIned = checkWalletSinIn(walletAddress)
+      console.log('isConnected', isConnected)
+
+      if(isSignIned === true) {
+        setIsSignUped(true)
+        setShowLoginModal(true)
+        console.log('isSignuped?', isSignUped)
+      } else if(isSignIned === false) {
+        setIsSignUped(false)
+        setShowLoginModal(true)
+        console.log('isSignuped?', isSignUped)
+      }
     } catch(error) {
       console.log(error)
     }
   }
  
-  const signInWithAddress = async (walletAddress) => {
-    const apiUrl = `https://4b880c9d-fec7-4b7a-824d-32c94510899f.mock.pstmn.io/auth`
+  const checkWalletSinIn = async (walletAddress) => {
+    const apiUrl = `${process.env.API_URL}/auth/${walletAddress}`
+    console.log(apiUrl)
     if(walletAddress !== "undefined") {
-      const response = await axios.post(apiUrl, {
-        account_address: walletAddress
-      })
-      console.log(response)
+      const response = await axios.get(apiUrl)
+      console.log('isSignIned?', response)
     }
   }
 
+
   return (
-    <AuthContext.Provider value={{ address, isConnected, walletConnect}}>
+    <AuthContext.Provider value={{ address, isConnected, isSignUped, token, showLoginModal, setShowLoginModal, setToken, setIsSignUped, walletConnect}}>
       { children }
     </AuthContext.Provider>
   )

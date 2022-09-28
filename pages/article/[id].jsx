@@ -140,7 +140,7 @@ function Article({ article }) {
 export default Article
 
 const getSelectedArticle = async (id) => {
-  const response = await axios.get(`https://4b880c9d-fec7-4b7a-824d-32c94510899f.mock.pstmn.io/article?id=${id}`)
+  const response = await axios.get(`${process.env.API_URL}/article?id=${id}`)
   const article = JSON.parse(JSON.stringify(response.data))
   return article
 }
@@ -155,12 +155,12 @@ export const getStaticProps = async(context) => {
   }
 }
 
-export const getStaticPaths = async() => {
+export const getStaticPaths = async(context) => {
+  const id = context.param.id
   return {
     paths: [
-      { params: { id: "1" }},
-      { params: { id: "2" }}
+      { params: { id: id}},
     ],
-    fallback: false
+    fallback: true
   }
 }

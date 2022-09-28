@@ -19,9 +19,10 @@ export default function Home() {
 
   async function getArticles(state, keyword) {
     console.log(state)
-    let apiUrl = `https://4b880c9d-fec7-4b7a-824d-32c94510899f.mock.pstmn.io/article/list?limit=10&page=0&sort=${state}&query=${keyword}`
+    let apiUrl = `${process.env.API_URL}/article?limit=10&page=1&sort=${state}&query=${keyword}`
     console.log(apiUrl)
     const response = await axios.get(apiUrl)
+    console.log(response)
     const articles = JSON.parse(JSON.stringify(response.data))
     setArticles(articles)
   }
@@ -37,7 +38,7 @@ export default function Home() {
   const getTrending = () => {
     setQueryState({
       state: "trending",
-      keywork: articles.keyword
+      keywork: articles.keyword 
     })
   }
 
@@ -61,7 +62,8 @@ export default function Home() {
 
   return (
     <main className='w-full h-auto mx-auto'>
-      <section className='pt-32 h-[420px] bg-[#F1F1F1] text-center'>
+      Hello
+      {/* <section className='pt-32 h-[420px] bg-[#F1F1F1] text-center'>
         <div className='text-3xl text-[#393939]'>Get started with Up-road</div>
         <div className='text-5xl text-[#000] font-semibold'>What are you looking up-to?</div>
         <div className="relative mt-12 w-[900px] mx-auto">
@@ -111,7 +113,7 @@ export default function Home() {
             )
           })
         }
-      </section>
+      </section> */}
       <Footer />
     </main>
   )
