@@ -156,6 +156,23 @@ function Article() {
 
 export default Article
 
+const getSelectedArticle = async (id) => {
+  const response = await axios.get(`${process.env.API_URL}/article?id=${id}`)
+  const article = JSON.parse(JSON.stringify(response.data))
+
+  return article
+}
+
+export const getStaticProps = async(context) => {
+  const id = context.params.id
+  const articleDetail = await getSelectedArticle(id)
+  return {
+    props: {
+      article: articleDetail
+    }
+  }
+}
+
 
 export const getStaticPaths = async(context) => {
   // Comment out by https://stackoverflow.com/a/65783200
