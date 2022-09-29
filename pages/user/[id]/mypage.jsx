@@ -34,7 +34,7 @@ const Mypage = ({ articles }) => {
 export default Mypage
 
 export async function getServerSideProps() {
-  const response = await axios.get("https://4b880c9d-fec7-4b7a-824d-32c94510899f.mock.pstmn.io/user/articles");
+  const response = await axios.get(`${process.env.API_URL}/user/articles`);
   const articles = JSON.parse(JSON.stringify(response.data))
   
   return {

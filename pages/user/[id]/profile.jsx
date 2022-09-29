@@ -32,9 +32,9 @@ const Profile = () => {
     setProfileImage(event.target.value)
   }
 
-  const getUserProfile = async () => {
-    const response = await axios.get("https://4b880c9d-fec7-4b7a-824d-32c94510899f.mock.pstmn.io/user")
-    console.log(response.data)
+  const getUserProfile = async () => { 
+    const response = await axios.get(`${process.env.API_URL}/user`) 
+    console.log('getUserProfile', response)
     setUserProfile({
       account_address: response.data.account_address,
       nickName: response.data.nickname,
@@ -52,7 +52,7 @@ const Profile = () => {
       setDescription(userProfile.description)
     }
 
-    const response = await axios.patch("https://4b880c9d-fec7-4b7a-824d-32c94510899f.mock.pstmn.io/user", {
+    const response = await axios.patch(`${process.env.API_URL}/user`, {
       account_address: userProfile.account_address,
       nickname: nickName,
       description: description

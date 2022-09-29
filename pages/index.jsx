@@ -33,9 +33,10 @@ export default function Home() {
 
   async function getArticles(state, keyword) {
     console.log(state)
-    let apiUrl = `https://4b880c9d-fec7-4b7a-824d-32c94510899f.mock.pstmn.io/article/list?limit=10&page=0&sort=${state}&query=${keyword}`
+    let apiUrl = `${process.env.API_URL}/article?limit=10&page=1&sort=${state}&query=${keyword}`
     console.log(apiUrl)
     const response = await axios.get(apiUrl)
+    console.log(response)
     const articles = JSON.parse(JSON.stringify(response.data))
     setArticles(articles)
   }
@@ -51,7 +52,7 @@ export default function Home() {
   const getTrending = () => {
     setQueryState({
       state: "trending",
-      keywork: articles.keyword
+      keywork: articles.keyword 
     })
   }
 
@@ -128,7 +129,7 @@ export default function Home() {
             )
           })
         }
-      </section>
+      </section> */}
       <Footer />
     </main>
   )

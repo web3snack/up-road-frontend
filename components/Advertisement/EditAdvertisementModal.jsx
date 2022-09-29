@@ -6,7 +6,7 @@ const EditAdvertisementModal = ({ setShowModal }) => {
   const [linkInput, setLinkInput] = useState("")
 
   const editAdvertisement = async() => {
-    const response = await axios.patch("https://4b880c9d-fec7-4b7a-824d-32c94510899f.mock.pstmn.io/advertisement", {
+    const response = await axios.patch(`${process.env.API_URL}/advertisement`, {
       title: titleInput,
       link: linkInput
     })
