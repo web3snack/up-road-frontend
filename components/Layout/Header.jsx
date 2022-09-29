@@ -6,15 +6,11 @@ import { useRouter } from 'next/router'
 import WalletConnect from '../Common/walletConnect'
 import ProfileModal from '../Common/profileModal'
 import { AuthContext } from '../../context/AuthContext'
-import ModeChangeToggle from './ModeChangeToggle'
-import { useTheme } from 'next-themes'
 
 const Header = () => {
 
   const router = useRouter()
   const path = router.pathname
-
-  const { theme, setTheme } = useTheme()
 
   const { isConnected } = useContext(AuthContext)
   const [ showModal, setShowModal ] = useState(false)
@@ -27,7 +23,7 @@ const Header = () => {
 
   return (
     <div className='w-full h-auto shadow fixed z-50'>
-      <div className={`relative w-full px-20 h-12 mx-auto flex justify-between items-center ${theme === 'light' ? 'bg-[#fff]' : 'bg-[#000]'}`}>
+      <div className={`relative w-full px-20 h-12 mx-auto flex justify-between items-center`}>
         <Logo />
         <nav className='flex itmes-center'>
 
@@ -43,27 +39,13 @@ const Header = () => {
                       ): null
                   }
                   <div className="mt-2" onClick={changeModalState}>
-                    {
-                      theme === 'light' 
-                       ? (
                         <Image 
                           src="/assets/black-user.svg"
                           alt="profile"
                           width={27}
                           height={27}
-                        />
-                       ) : (
-                        <Image 
-                          src="/assets/white-user.svg"
-                          alt="profile"
-                          width={27}
-                          height={27}
-                        />
-                       )
-
-                    }
-
-                  </div>
+                        />     
+                 </div>
                 </div>
             : <WalletConnect />
 
@@ -75,7 +57,6 @@ const Header = () => {
             <ProfileModal />
          </div> )  
          : null }
-         <ModeChangeToggle />
       </div>
     </div>
   )

@@ -1,13 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import CreatedPostItem from '../../components/Post/CreatedPostItem'
 import AdvertisementCreated from '../../components/Advertisement/AdvertisementCreated'
 import Link from 'next/link'
 
-function Article({ article }) {
+function Article() {
 
-  const id = article.id
+  const router = useRouter()
+  const article_id = router.query.id
+  console.log(router)
+  const [article, setArticle] = useState({})
+
+  useEffect(() => {
+    getSelectedArticle(article_id)
+  })
+
+  const getSelectedArticle = async () => {
+    const response = await axios.get(`${process.env.API_URL}/article/:${article_id}`)
+    console.log('response', response)
+    const article = JSON.parse(JSON.stringify(response.data))
+    setArticle(article)
+  }
+
+  
+
   const title = article.title
   const description = article.description 
   const keywords = article.keywords 
@@ -18,11 +36,10 @@ function Article({ article }) {
   const writer = article.writer
   const advertise = article.advertise
 
-  console.log(article)
 
   return (
     <main className='w-[800px] mx-auto'>
-      <section className='pt-20'>
+      {/* <section className='pt-20'>
         <div className='flex justify-end items-center'>
           <Image 
             src="/assets/Heart-icon.svg"
@@ -132,35 +149,10 @@ function Article({ article }) {
            )
         }
 
-      </section>
+      </section> */}
     </main>
   )
 }
 
 export default Article
 
-const getSelectedArticle = async (id) => {
-  const response = await axios.get(`${process.env.API_URL}/article?id=${id}`)
-  const article = JSON.parse(JSON.stringify(response.data))
-  return article
-}
-
-export const getStaticProps = async(context) => {
-  const id = context.params.id
-  const articleDetail = await getSelectedArticle(id)
-  return {
-    props: {
-      article: articleDetail
-    }
-  }
-}
-
-export const getStaticPaths = async(context) => {
-  const id = context.param.id
-  return {
-    paths: [
-      { params: { id: id}},
-    ],
-    fallback: true
-  }
-}

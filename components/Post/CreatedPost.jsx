@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const CreatedPost = ({ article }) => {
-  const id = article.id
+  const id = article.article_id
   const title = article.title
   const description = article.description
   const keywords = article.keywords
@@ -20,7 +20,7 @@ const CreatedPost = ({ article }) => {
             <div className='w-1/6 h-12 flex items-center justify-center'>
               <span className='mr-2'>{writer.nickname}</span>
               <Image 
-                src="/assets/Profile-icon.svg"
+                src="/assets/black-user.svg"
                 alt='content owner'
                 width={25}
                 height={25}
@@ -33,7 +33,7 @@ const CreatedPost = ({ article }) => {
               {
                 keywords.map((keyword, index) => {
                   return (
-                      <span key={index} className='px-3 mr-3 bg-slate-100 rounded-xl'>{keyword.name}</span>
+                      <span key={index} className='px-3 mr-3 bg-slate-100 rounded-xl'>{keyword}</span>
                   )
                 } )
               }

@@ -12,7 +12,7 @@ const CreatedPostItem = () => {
         </div>
       </div>
       <Image 
-        src="/assets/Sample.png"
+        src="/assets/black-user.png"
         alt="link"
         width={300}
         height={180}
