@@ -31,11 +31,11 @@ const CreatedPost = ({ article }) => {
           <div className='flex justify-between items-center'>
             <div className="flex justify-start">
               {
-                keywords.map((keyword, index) => {
-                  return (
-                      <span key={index} className='px-3 mr-3 bg-slate-100 rounded-xl'>{keyword}</span>
-                  )
-                } )
+                // keywords.map((keyword, index) => {
+                //   return (
+                //       <span key={index} className='px-3 mr-3 bg-slate-100 rounded-xl'>{keyword}</span>
+                //   )
+                // })
               }
             </div>
             <div className='text-[#ccc] text-sm'>{createdAt.slice(0, 10)}</div>
