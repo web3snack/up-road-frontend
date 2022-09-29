@@ -156,11 +156,8 @@ export const getStaticProps = async(context) => {
 }
 
 export const getStaticPaths = async(context) => {
-  const id = context.param.id
   return {
-    paths: [
-      { params: { id: id}},
-    ],
-    fallback: true
+    paths: [], //indicates that no page needs be created at build time
+    fallback: 'blocking' //indicates the type of fallback
   }
 }
