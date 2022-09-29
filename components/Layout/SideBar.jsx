@@ -49,7 +49,7 @@ const SideBar = () => {
         <div className='flex mt-2 justify-center items-center hover:bg-[#ccc] hover:cursor-pointer'>
           <div className='w-32 py-3 flex items-center'>
             <Image 
-              src="/assets/Profile-icon.svg"
+              src="/assets/black-user.svg"
               alt="like"
               width={25}
               height={25}

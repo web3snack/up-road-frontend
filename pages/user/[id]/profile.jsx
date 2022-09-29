@@ -52,7 +52,7 @@ const Profile = () => {
       setDescription(userProfile.description)
     }
 
-    const response = await axios.patch(`${process.env.API_URL}/user`, {
+    const response = await axios.patch(`${process.env.API_URL}//user`, {
       account_address: userProfile.account_address,
       nickname: nickName,
       description: description

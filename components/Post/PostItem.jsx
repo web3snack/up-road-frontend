@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SlideToggle from "react-slide-toggle"
 import Image from 'next/image'
 
-const PostItem = ({ setLinkHandler, setDescriptionHandler, removeContent, content }) => {
+const PostItem = ({ removeContent, setBlock, content }) => {
 
   const [isToggled, setIsToggled] = useState(false);
+  const [linkHandler, setLinkHandler] = useState("");
+  const [descriptionHandler, setDescriptionHandler] = useState("");
+
+  useEffect(() => {
+    setBlock({
+      link: linkHandler,
+      description: descriptionHandler
+    })
+  }, [linkHandler, descriptionHandler])
 
   const changeToggleState = () => {
     isToggled === true
@@ -31,7 +40,6 @@ const PostItem = ({ setLinkHandler, setDescriptionHandler, removeContent, conten
           <div className="my-collapsible px-[10px] py-2 rounded-xl w-full border">
             <div className='flex items-center'>
               <button id='toggle' className='hidden'></button>
-              {content.id}
               <label htmlFor="toggle" onClick={toggle} >
                 <div className={`w-[35px] h-[35px] flex justify-center border border-transparent items-center rounded-2xl hover:border-[#eee] hover:cursor-pointer ${isToggled === true ? "rotate-90" : null} duration-100`} onClick={changeToggleState}> 
                   <Image

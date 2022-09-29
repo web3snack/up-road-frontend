@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import PostItem from './PostItem'
 import Image from 'next/image'
 
-const PostList = ({ setLinkHandler, setDescriptionHandler, removeContent, contentList, setContentList }) => {
+const PostList = ({  removeContent, contentList, setBlock }) => {
 
   const dragItem = React.useRef(null)
   const dragOverItem = React.useRef(null)
@@ -40,8 +40,7 @@ const PostList = ({ setLinkHandler, setDescriptionHandler, removeContent, conten
               />
             </div>
             <PostItem 
-              setLinkHandler={setLinkHandler}
-              setDescriptionHandler={setDescriptionHandler}
+              setBlock={setBlock}
               removeContent={removeContent}
               content={content}
             />
